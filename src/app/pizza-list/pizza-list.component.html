@@ -1,0 +1,10 @@
+<div class="container py-4">
+    <h2 class="mb-4">Lista de {{titulo}}</h2>
+    <div class="list-group">
+        @for (producto of products$ | async; track producto.nombre){
+            <app-product [product]="producto"></app-product>
+        }@empty{
+            
+        }
+    </div>
+</div>
