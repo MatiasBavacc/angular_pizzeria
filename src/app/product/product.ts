@@ -6,5 +6,6 @@ export interface Product{
     promo: boolean;
     cantidad: number;
     stock: number;
-    tipo: 'pizza' | 'empanada';
+    tipo: 'pizza' | 'empanada' | 'bebida' | 'tarta' | 'guarnicion' | 'sanguche';
+    tags: string;
 }

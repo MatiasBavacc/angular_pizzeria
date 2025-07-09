@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './product/product';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
 import { ProductDataService } from './product-data.service';
 
 @Injectable({
@@ -10,16 +10,10 @@ import { ProductDataService } from './product-data.service';
 export class CarritoProductService {
   private _carrito: Product[] = [];
   carrito: BehaviorSubject<Product[]> = new BehaviorSubject(this._carrito);
-  //public items: Observable<Product[]> = this.carrito.asObservable();
 
+  private _productosOriginales: Product[] = [];
   private _productsShop: Product[] = [];
   productsShop: BehaviorSubject<Product[]> = new BehaviorSubject(this._productsShop);
-
-  private _productsEmpanada: Product[] = [];
-  productsEmpanada: BehaviorSubject<Product[]> = new BehaviorSubject(this._productsShop);
-
-  private _productsPizza: Product[] = [];
-  productsPizza: BehaviorSubject<Product[]> = new BehaviorSubject(this._productsShop);
 
   constructor(private productService: ProductDataService,
 
@@ -36,7 +30,6 @@ export class CarritoProductService {
         this._carrito.push({... product});
       }
       this.carrito.next(this._carrito);
-      //console.log(this._carrito);
     }
   }
   
@@ -44,49 +37,59 @@ export class CarritoProductService {
     this._carrito = this._carrito.filter((p)=> p.nombre != productCopia.nombre);
     this.carrito.next(this._carrito);
 
-    if(type === 'pizza'){
-      this._productsPizza.map((p)=>{
-        if(p.nombre == productCopia.nombre){
-          p.stock += productCopia.cantidad;
-          p.cantidad = 0; 
-        }
-      });
-      this.productsPizza.next(this._productsPizza);
-    }else if(type === 'empanada'){
-      this._productsEmpanada.map((p)=>{
-        if(p.nombre == productCopia.nombre){
-          p.stock += productCopia.cantidad;
-          p.cantidad = 0; 
-        }
-      });
-      this.productsEmpanada.next(this._productsEmpanada);
-    }else{
-      this._productsShop.map((p)=>{
-        if(p.nombre == productCopia.nombre){
-          p.stock += productCopia.cantidad;
-          p.cantidad = 0; 
-        }
-      });
-      this.productsShop.next(this._productsShop);
-    }
+    this._productsShop.map((p)=>{
+      if(p.nombre == productCopia.nombre){
+        p.stock += productCopia.cantidad;
+        p.cantidad = 0; 
+      }
+    });
+    this.productsShop.next(this._productsShop);
+
   }
 
-  cargarProductosShop(type: string): void {
-    if(type === 'pizza'){
-      this.productService.getProductByTipe(type)
-        .subscribe((productsItems)=>{  this._productsPizza = productsItems;
-        this.productsPizza.next(this._productsPizza);
-      });
-    }else if(type === 'empanada'){
-      this.productService.getProductByTipe(type)
-        .subscribe((productsItems)=>{  this._productsEmpanada = productsItems;
-        this.productsEmpanada.next(this._productsEmpanada);
-      });
-    }else{
-        this.productService.getProductByTipe(type)
-        .subscribe((productsItems)=>{  this._productsShop = productsItems;
-        this.productsShop.next(this._productsShop);
-      });
+  getTotal(): number{
+    let total : number = 0;
+    for(let p of this._carrito){
+      total += p.precio * p.cantidad;
     }
+    return total;
+  }
+
+
+  cargarProductosShop(): void {
+  this.productService.getAll().subscribe((productsItems) => {
+    this._productosOriginales = productsItems;
+    this._productsShop = productsItems.map((pOriginal) => {
+      const enCarrito = this._carrito.find((c) => c.nombre === pOriginal.nombre);
+      return {
+        ...pOriginal,
+        stock: pOriginal.stock - (enCarrito?.cantidad || 0),
+        cantidad: enCarrito?.cantidad || 0
+      };
+    });
+    this.productsShop.next(this._productsShop);
+  });
+}
+
+  filtrarTags(palabra: string): void {
+    const palabraNormalizada = palabra
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+    if (palabraNormalizada.length === 0) {
+      this._productsShop = [...this._productosOriginales];
+    } 
+    else {
+      this._productsShop = this._productosOriginales.filter((p) =>
+        p.tags
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .includes(palabraNormalizada)
+      );
+    }
+    
+    this.productsShop.next(this._productsShop);
   }
 }

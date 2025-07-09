@@ -1,0 +1,24 @@
+
+<div class="row">
+    <div class="col-8">
+        <div class="container py-4">
+            <h2 class="mb-4">Lista de {{titulo}}</h2>
+            <div class="list-group">
+                @for (producto of products$ | async; track producto.nombre){
+                    @if(producto.promo){
+                        <app-product [product]="producto" [precioPromo]="true"></app-product>
+                    }
+                }@empty{
+                    <div class="text-center py-5 text-muted">
+                        <i class="bi bi-search display-4 mb-3"></i>
+                        <p class="fs-5">No se encontraron resultados para esta búsqueda.</p>
+                        <p class="small">Intentá con otra palabra clave o revisá los filtros aplicados.</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <app-pizzeria-carrito></app-pizzeria-carrito>
+    </div>
+</div>

@@ -1,25 +1,28 @@
-<div class="container py-4">
-  <h2 class="mb-4">Carrito de compras</h2>
-
-</div>
-<div class="list-group">
-  <!-- Aquí se mostrarán los productos del carrito -->
-    @for (product of carritoList$ | async ; track product.nombre) {
-        <div class="list-group-item d-flex align-items-start">
-            <img [src]="product.image" [alt]="product.nombre" class="me-3 rounded" />
-            <div class="w-100 d-flex justify-content-between align-items-start">
-                <div class="flex-column">
-                    <div class="fw-bold">{{ product.nombre }}</div>
-                    {{ product.cantidad }}<br />
+<div class="container-Carrito">
+    <div class="container py-4">
+      <h2 class="mb-4">Carrito de compras</h2>
+    
+    </div>
+    <div class="list-group">
+      <!-- Aquí se mostrarán los productos del carrito -->
+        @for (product of carritoList$ | async ; track product.nombre) {
+            <div class="list-group-item d-flex align-items-start">
+                <img [src]="product.image" [alt]="product.nombre" class="me-3 rounded" />
+                <div class="w-100 d-flex justify-content-between align-items-start">
+                    <div class="flex-column">
+                        <div class="fw-bold">{{ product.nombre }}</div>
+                        {{ product.cantidad }}<br />
+                    </div>
                 </div>
+                <span class="badge bg-primary rounded-pill align-self-start">
+                    ${{ product.precio * product.cantidad}} 
+                </span>
+                <!-- <app-count-product [(cantidad)]="product.cantidad"></app-count-product> -->
+                <button type="button" class="btn btn-warning" (click)="remove(product, product.tipo)">Quitar</button>
             </div>
-            <span class="badge bg-primary rounded-pill align-self-start">
-                ${{ product.precio * product.cantidad}}
-            </span>
-            <!-- <app-count-product [(cantidad)]="product.cantidad"></app-count-product> -->
-            <button type="button" class="btn btn-warning" (click)="remove(product, product.tipo)">Quitar</button>
-        </div>
-    }@empty {
-        <div class="text-muted text-center">Este carrito está vacío...</div>
-    }
+        }@empty {
+            <div class="text-muted text-center">Este carrito está vacío...</div>
+        }
+        <div class="text-center fw-bold fs-4">Total {{total | currency}}</div>
+    </div>
 </div>

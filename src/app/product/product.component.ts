@@ -12,6 +12,7 @@ import { CarritoProductService } from '../carrito-product.service';
 })
 export class ProductComponent {
   @Input() product!: Product;
+  @Input() precioPromo!: boolean;
 
   constructor(
     private carrito : CarritoProductService
@@ -37,6 +38,13 @@ export class ProductComponent {
     this.carrito.agregarAlCarrito(product);
     product.stock -= product.cantidad;
     product.cantidad = 0;
+  }
+
+  getPrecio(product: Product): number{
+    if(this.precioPromo){
+      return product.precio * 0.8; // Aplicar un 20% de descuento
+    }
+    return product.precio;
   }
   
 }

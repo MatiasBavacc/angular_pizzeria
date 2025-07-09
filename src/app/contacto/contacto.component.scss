@@ -1,0 +1,72 @@
+.contacto-section {
+  background-color: #fff;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-top: 2px solid #ccc;
+}
+
+.contacto-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.contacto-section p {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.formulario-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.campo input,
+.campo textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-enviar {
+  background-color: #198754; /* Verde como el botón Agregar */
+  color: white;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-enviar:hover {
+  background-color: #146c43;
+}
+
+.info-contacto {
+  margin-top: 2rem;
+}
+
+.info-contacto h3 {
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.info-contacto ul {
+  list-style: none;
+  padding: 0;
+}
+
+.info-contacto li {
+  margin-bottom: 0.5rem;
+  color: #333;
+}

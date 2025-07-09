@@ -1,6 +1,6 @@
 <div class="list-group-item d-flex align-items-start">
     <img [src]="product.image" [alt]="product.nombre" class="me-3 rounded" />
-    <div class="w-100 d-flex justify-content-between align-items-start">
+    <div class="w-100 justify-content-between align-items-start">
         <div class="flex-column">
             <div class="fw-bold">{{ product.nombre }}</div>
             {{ product.descripcion }}<br />
@@ -11,14 +11,20 @@
     </div>
     @if(product.stock >0){
         <app-count-product [(cantidad)]="product.cantidad" [max]="getStock(product)"></app-count-product>
-        <!-- {{product.cantidad}} -->
         <button type="button" class="btn btn-success" (click)="agregarAlCarrito(product)">Agregar</button>
     }@else{
         <div class="alert alert-warning w-50" role="alert">
             <strong>Sin Stock</strong>
         </div>
-        <div class="ms-3">
-        </div>
     }
-    <span class="badge bg-primary rounded-pill align-self-start">$ {{ product.precio }}</span>
+    <div class="d-flex flex-column align-items-start ms-3 gap-1">
+        @if(precioPromo){
+            <span class="badge bg-warning text-dark rounded-pill precioAnterior">
+                {{ product.precio | currency }}
+            </span>
+        }
+        <span class="badge bg-primary rounded-pill">
+            {{ getPrecio(product) | currency }}
+        </span>
+    </div>
 </div>

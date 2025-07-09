@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CarritoProductService } from '../carrito-product.service';
 import { Product } from '../product/product';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pizzeria-carrito',
@@ -12,13 +12,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class PizzeriaCarritoComponent {
   
   carritoList$: Observable<Product[]> = new Observable<Product[]>();
+  total: number = 0;
 
   constructor(private carrito : CarritoProductService) {
     this.carritoList$ = this.carrito.carrito.asObservable();
+    this.carritoList$.subscribe(() => {
+      this.total = this.carrito.getTotal();
+    });
   }
 
   remove(product: Product, type: string): void {
     this.carrito.remove(product, type);
   } 
+  
 
 }

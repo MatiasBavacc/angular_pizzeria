@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { PizzeriaPizzasComponent } from './pizzeria-pizzas/pizzeria-pizzas.component';
 import { PizzeriaEmpanadasComponent } from './pizzeria-empanadas/pizzeria-empanadas.component';
 import { PizzeriaHomeComponent } from './pizzeria-home/pizzeria-home.component';
+import { ProductSectionComponent } from './product-section/product-section.component'; 
+import { PromocionComponent } from './promocion/promocion.component'; 
+import { PizzeriaCarritoComponent } from './pizzeria-carrito/pizzeria-carrito.component';
+import { ContactoComponent } from './contacto/contacto.component';
+
 
 const routes: Routes = [
   {
@@ -16,6 +21,22 @@ const routes: Routes = [
   {
     path: 'empanadas',
     component: PizzeriaEmpanadasComponent,
+  },
+  {
+    path: 'productos',
+    component: ProductSectionComponent,
+  },
+  {
+    path: 'ofertas',
+    component: PromocionComponent,
+  },
+  {
+    path: 'carrito',
+    component: PizzeriaCarritoComponent,
+  },
+  {
+    path: 'contacto',
+    component: ContactoComponent,
   },
 ];
 

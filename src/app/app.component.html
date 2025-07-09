@@ -10,7 +10,7 @@
             <a class="nav-link active" aria-current="page" [routerLink]="['/']">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Ofertas</a>
+            <a class="nav-link" [routerLink]="['/ofertas']">Ofertas</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -20,19 +20,18 @@
               <li><a class="dropdown-item" [routerLink]="['/pizzas']">Pizzas</a></li>
               <li><a class="dropdown-item" [routerLink]="['/empanadas']">Empanadas</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Tartas</a></li>
-              <li><a class="dropdown-item" href="#">Sanguches</a></li>
-              <li><a class="dropdown-item" href="#">Guarniciones</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{ titulo: 'Tartas', tipo: 'tarta' }">Tartas</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{ titulo: 'Sanguches', tipo: 'sanguche' }">Sanguches</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{ titulo: 'Guarniciones', tipo: 'guarnicion' }">Guarniciones</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/productos']" [queryParams]="{ titulo: 'Bebidas', tipo: 'bebida' }">Bebidas</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contacto</a>
+            <a class="nav-link" [routerLink]="['/contacto']">Contacto</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        <app-imagen-carrito></app-imagen-carrito>
+        <app-buscador></app-buscador>
       </div>
     </div>
 </nav>
