@@ -1,0 +1,5 @@
+<div class="d-flex align-items-center justify-content-center mx-3">
+    <button class="btn btn-outline-secondary btn-sm" (click)="restarCantidad()">-</button>
+    <input class="form-control form-control-sm inputCantidad" type="text" [value]="cantidad" (keyup)="actualizarCantidad($event)" name="cantidad">
+    <button class="btn btn-outline-secondary btn-sm" (click)="sumarCantidad()">+</button>
+</div>

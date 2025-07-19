@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CarritoProductService } from './carrito-product.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'pizzeria';
+  title: string = 'Pizzeria';
+  constructor(private carrito : CarritoProductService){}
+
+  reset(): void {
+      this.carrito.resetAll();
+  }
 }

@@ -1,0 +1,10 @@
+<form [formGroup]="busquedaForm" class="d-flex" role="search" (keyup)="activarBusqueda()">
+  <label class="visually-hidden" for="buscador">Buscar</label>
+  <input id="buscador"
+         class="form-control me-2"
+         type="search"
+         placeholder="Buscar"
+         aria-label="Buscar"
+         formControlName="busqueda">
+  <button class="btn btn-outline-success" type="submit" (submit)="activarBusqueda()">Search</button>
+</form>

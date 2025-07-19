@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@media only screen and (width < 1200px){
+      .container-Carrito-section{
+            display: none;
+      }
+
+      .list-group-item{
+            border: none;
+      } 
+
+}

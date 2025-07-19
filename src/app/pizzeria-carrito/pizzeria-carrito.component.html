@@ -1,0 +1,31 @@
+<div class="container-Carrito carrito-sticky">
+    <div class="container py-4">
+      <h2 class="mb-4">Carrito de compras</h2>
+    </div>
+    <div class="list-group contenido-carrito">
+        @for (product of carritoList$ | async ; track product.nombre) {
+            <div class="list-group-item d-flex align-items-start">
+                <img [src]="product.image" [alt]="product.nombre" class="me-3 rounded" />
+                <div class="w-100 d-flex justify-content-between align-items-start">
+                    <div class="flex-column">
+                        <div class="fw-bold">{{ product.nombre }}</div>
+                        {{ product.cantidad }}<br />
+                    </div>
+                </div>
+                <span class="badge bg-primary rounded-pill align-self-start">
+                    ${{ product.precio * product.cantidad}} 
+                </span>
+                <button type="button" class="btn btn-warning" (click)="remove(product)">Quitar</button>
+            </div>
+        }@empty {
+            <div class="text-muted text-center">Este carrito está vacío...</div>
+        }
+        <div class="text-center fw-bold fs-4">Total {{total | currency}}</div>
+    </div>
+    @if(total > 0) {
+        <div class="text-center">
+            <button type="button" class="btn btn-success mt-3" (click)="comprar()">Comprar</button>
+            <button type="button" class="btn btn-danger mt-3" (click)="vaciar()">Vaciar carrito</button>
+        </div>
+    }
+</div>
