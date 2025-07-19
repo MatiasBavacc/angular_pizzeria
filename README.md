@@ -20,7 +20,7 @@
 
 # Uso
 1. Al navegar por el incio, podemos encontrar una barra de navegacion, que nos introduce a promociones 
-o un carta con varidad de productos, una caja de pizza como *carrito*, que al contener un producto, se llenara con una pizza.
+o una carta con varidad de productos, una caja de pizza como *carrito*, que al contener un producto, se llenara con una pizza.
 2. Luego en el cuerpo central de la app nos podemos encontrar con tres listas distintas de articulos para 
 adquirir, seleccionando una cantidad podemos sumar al *carrito* precionando en **Agregar**.
 3. Aparecera una lista nueva de productos a la derecha, que son los que queremos adquirir, en este *carrito* se podran quitar articulos
